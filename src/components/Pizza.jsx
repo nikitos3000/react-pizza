@@ -1,22 +1,30 @@
-function Pizza(props) {
+import React from 'react';
+
+function Pizza({ title, imgUrl, price }) {
+  const [count, setCount] = React.useState(0);
+
+  function counter() {
+    setCount(count + 1);
+  }
+
   return (
-    <div class="pizza-block">
-      <img class="pizza-block__image" src={props.imgUrl} alt="Pizza" />
-      <h4 class="pizza-block__title">{props.title}</h4>
-      <div class="pizza-block__selector">
+    <div className="pizza-block">
+      <img className="pizza-block__image" src={imgUrl} alt="Pizza" />
+      <h4 className="pizza-block__title">{title}</h4>
+      <div className="pizza-block__selector">
         <ul>
-          <li class="active">тонкое</li>
+          <li className="active">тонкое</li>
           <li>традиционное</li>
         </ul>
         <ul>
-          <li class="active">26 см.</li>
+          <li className="active">26 см.</li>
           <li>30 см.</li>
           <li>40 см.</li>
         </ul>
       </div>
-      <div class="pizza-block__bottom">
-        <div class="pizza-block__price">От {props.price} Р</div>
-        <div class="button button--outline button--add">
+      <div className="pizza-block__bottom">
+        <div className="pizza-block__price">От {price} Р</div>
+        <button onClick={counter} className="button button--outline button--add">
           <svg
             width="12"
             height="12"
@@ -29,8 +37,8 @@ function Pizza(props) {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
-        </div>
+          <i>{count}</i>
+        </button>
       </div>
     </div>
   );
