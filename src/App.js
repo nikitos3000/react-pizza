@@ -4,6 +4,9 @@ import Header from './components/Header';
 import Categories from './components/Categories';
 import Sort from './components/Sort';
 import Pizza from './components/Pizza';
+import pizzas from './assets/pizza.json';
+
+console.log(pizzas);
 
 function App() {
   return (
@@ -17,13 +20,16 @@ function App() {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            <Pizza
-              title="Пицца"
-              imgUrl={
-                'https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg'
-              }
-              price="500"
-            />
+            {pizzas.map((obj) => (
+              <Pizza
+                key={obj.id}
+                title={obj.title}
+                price={obj.price}
+                imgUrl={obj.imageUrl}
+                sizes={obj.sizes}
+                types={obj.types}
+              />
+            ))}
           </div>
         </div>
       </div>

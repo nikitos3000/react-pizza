@@ -1,11 +1,16 @@
 import React from 'react';
+const typeNames = ['тонкая', 'толстая'];
+function Pizza({ title, imgUrl, price, sizes, types }) {
+  const [activeType, setActiveType] = React.useState(0);
+  const [activeSize, setActiveSize] = React.useState(0);
 
-function Pizza({ title, imgUrl, price }) {
-  const [count, setCount] = React.useState(0);
+  const onClickType = (num) => {
+    setActiveType(num);
+  };
 
-  function counter() {
-    setCount(count + 1);
-  }
+  const onClickSize = (num) => {
+    setActiveSize(num);
+  };
 
   return (
     <div className="pizza-block">
@@ -13,18 +18,26 @@ function Pizza({ title, imgUrl, price }) {
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">тонкое</li>
-          <li>традиционное</li>
+          {types.map((m) => (
+            <li onClick={() => onClickType(m)} key={m} className={activeType === m ? 'active' : ''}>
+              {typeNames[m]}
+            </li>
+          ))}
         </ul>
         <ul>
-          <li className="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          {sizes.map((r, id) => (
+            <li
+              onClick={() => onClickSize(id)}
+              key={id}
+              className={activeSize === id ? 'active' : ''}>
+              {r}
+            </li>
+          ))}
         </ul>
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">От {price} Р</div>
-        <button onClick={counter} className="button button--outline button--add">
+        <button className="button button--outline button--add">
           <svg
             width="12"
             height="12"
@@ -37,7 +50,7 @@ function Pizza({ title, imgUrl, price }) {
             />
           </svg>
           <span>Добавить</span>
-          <i>{count}</i>
+          <i>{0}</i>
         </button>
       </div>
     </div>

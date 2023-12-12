@@ -31,7 +31,7 @@
           // Плавная анимация
         "editor.cursorSmoothCaretAnimation": "on",
         "editor.codeActionsOnSave": {
-          "source.fixAll.eslint": true
+          "source.fixAll.eslint": "explicit"
         },
       
         "workbench.colorTheme": "Mokka",

@@ -1,4 +1,16 @@
+import React from 'react';
+
 function Sort() {
+  const filters = ['популярности', 'цене', 'алфавиту'];
+  const [sorts, setSorts] = React.useState(false);
+  const [activeFilter, setActiveFilter] = React.useState(0);
+  const onClickSort = () => {
+    setSorts(!sorts);
+  };
+  const selectFilter = (num) => {
+    setActiveFilter(num);
+    setSorts(false);
+  };
   return (
     <div className="sort">
       <div className="sort__label">
@@ -14,15 +26,22 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>популярности</span>
+        <span onClick={onClickSort}>{filters[activeFilter]}</span>
       </div>
-      <div className="sort__popup">
-        <ul>
-          <li className="active">популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
-        </ul>
-      </div>
+      {sorts && (
+        <div className="sort__popup">
+          <ul>
+            {filters.map((val, i) => (
+              <li
+                key={i}
+                onClick={() => selectFilter(i)}
+                className={activeFilter === i ? 'active' : ''}>
+                {val}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
