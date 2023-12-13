@@ -1,12 +1,10 @@
 import React from 'react';
-import './scss/app.scss';
 import Header from './components/Header';
-import Categories from './components/Categories';
-import Sort from './components/Sort';
-import Pizza from './components/Pizza';
-import pizzas from './assets/pizza.json';
-
-console.log(pizzas);
+import { Route, Routes } from 'react-router-dom';
+import EmptyBlock from './pages/NotFound';
+import Home from './pages/Home';
+import './scss/app.scss';
+import Cart from './pages/Cart';
 
 function App() {
   return (
@@ -14,23 +12,11 @@ function App() {
       <Header />
       <div className="content">
         <div className="container">
-          <div className="content__top">
-            <Categories />
-            <Sort />
-          </div>
-          <h2 className="content__title">Все пиццы</h2>
-          <div className="content__items">
-            {pizzas.map((obj) => (
-              <Pizza
-                key={obj.id}
-                title={obj.title}
-                price={obj.price}
-                imgUrl={obj.imageUrl}
-                sizes={obj.sizes}
-                types={obj.types}
-              />
-            ))}
-          </div>
+          <Routes>
+            <Route path="" element={<Home />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="*" element={<EmptyBlock />} />
+          </Routes>
         </div>
       </div>
     </div>
