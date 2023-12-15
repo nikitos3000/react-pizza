@@ -4,27 +4,40 @@ import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
 import Skeleton from '../components/Pizza/Skeleton';
-import pizzas from '../assets/pizza.json';
 
 const Home = () => {
   const [isLoading, setIsLoading] = React.useState(true);
-  console.log(2);
-  React.useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
-    window.scrollTo(0, 0);
-  }, []);
+  const [dataPizza, setDataPizza] = React.useState([]);
+  const [categoryId, setCategoryId] = React.useState(0);
+  const [sortType, SetSortType] = React.useState({
+    name: 'популярности ↓',
+    sort: 'rating',
+  });
 
+  React.useEffect(() => {
+    setIsLoading(true);
+    fetch(
+      `https://657998921acd268f9af9769e.mockapi.io/items?${
+        categoryId > 0 ? `category=${categoryId}` : ''
+      }&sortBy=${sortType.sort.replace('-', '')}&order=${
+        sortType.sort.includes('-') ? 'asc' : 'desc'
+      }`,
+    )
+      .then((data) => data.json())
+      .then((res) => {
+        setDataPizza(res);
+        setIsLoading(false);
+      });
+  }, [categoryId, sortType]);
   return (
     <div className="container">
       <div className="content__top">
-        <Categories />
-        <Sort />
+        <Categories value={categoryId} onClickCategory={(i) => setCategoryId(i)} />
+        <Sort value={sortType} onChangeSort={(i) => SetSortType(i)} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {pizzas.map((obj) =>
+        {dataPizza.map((obj) =>
           isLoading ? (
             <Skeleton />
           ) : (

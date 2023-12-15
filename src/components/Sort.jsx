@@ -1,14 +1,20 @@
 import React from 'react';
 
-function Sort() {
-  const filters = ['популярности', 'цене', 'алфавиту'];
+function Sort({ value, onChangeSort }) {
+  const filters = [
+    { name: 'популярности ↓', sort: 'rating' },
+    { name: 'цене ↓', sort: 'price' },
+    { name: 'алфавиту ↓', sort: 'title' },
+    { name: 'популярности ↑', sort: '-rating' },
+    { name: 'цене ↑', sort: '-price' },
+    { name: 'алфавиту ↑', sort: '-title' },
+  ];
   const [sorts, setSorts] = React.useState(false);
-  const [activeFilter, setActiveFilter] = React.useState(0);
   const onClickSort = () => {
     setSorts(!sorts);
   };
   const selectFilter = (num) => {
-    setActiveFilter(num);
+    onChangeSort(num);
     setSorts(false);
   };
   return (
@@ -26,17 +32,17 @@ function Sort() {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={onClickSort}>{filters[activeFilter]}</span>
+        <span onClick={onClickSort}>{value.name}</span>
       </div>
       {sorts && (
         <div className="sort__popup">
           <ul>
-            {filters.map((val, i) => (
+            {filters.map((obj, i) => (
               <li
                 key={i}
-                onClick={() => selectFilter(i)}
-                className={activeFilter === i ? 'active' : ''}>
-                {val}
+                onClick={() => selectFilter(obj)}
+                className={value.sort === obj.sort ? 'active' : ''}>
+                {obj.name}
               </li>
             ))}
           </ul>
