@@ -5,7 +5,7 @@ import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
 import Skeleton from '../components/Pizza/Skeleton';
 
-const Home = () => {
+const Home = ({ searchValue }) => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [dataPizza, setDataPizza] = React.useState([]);
   const [categoryId, setCategoryId] = React.useState(0);
@@ -28,7 +28,7 @@ const Home = () => {
         setDataPizza(res);
         setIsLoading(false);
       });
-  }, [categoryId, sortType]);
+  }, [categoryId, sortType, searchValue]);
   return (
     <div className="container">
       <div className="content__top">
