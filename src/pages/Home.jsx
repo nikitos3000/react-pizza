@@ -14,12 +14,14 @@ const Home = ({ searchValue }) => {
     sort: 'rating',
   });
 
+  const search = searchValue ? `search=${searchValue}` : '';
+
   React.useEffect(() => {
     setIsLoading(true);
     fetch(
       `https://657998921acd268f9af9769e.mockapi.io/items?${
         categoryId > 0 ? `category=${categoryId}` : ''
-      }&sortBy=${sortType.sort.replace('-', '')}&order=${
+      }&${search}&sortBy=${sortType.sort.replace('-', '')}&order=${
         sortType.sort.includes('-') ? 'asc' : 'desc'
       }`,
     )
