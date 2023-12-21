@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './Search.module.scss';
+import { SearchContext } from '../../App';
 
-const Search = ({ searchValue, setSearchValue }) => {
+const Search = () => {
+  const { searchValue, setSearchValue } = React.useContext(SearchContext);
+
   function clear() {
     setSearchValue('');
   }
@@ -20,7 +23,7 @@ const Search = ({ searchValue, setSearchValue }) => {
           height={17}
           className={styles.clear}
           src="/img/krest.png"
-          alt=""
+          alt="clear"
         />
       )}
     </div>
