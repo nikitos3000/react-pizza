@@ -1,20 +1,27 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSort } from '../redux/slices/filterSlice';
 
-function Sort({ value, onChangeSort }) {
-  const filters = [
-    { name: 'популярности ↓', sort: 'rating' },
-    { name: 'цене ↓', sort: 'price' },
-    { name: 'алфавиту ↓', sort: 'title' },
-    { name: 'популярности ↑', sort: '-rating' },
-    { name: 'цене ↑', sort: '-price' },
-    { name: 'алфавиту ↑', sort: '-title' },
-  ];
+const filters = [
+  { name: 'популярности ↓', sort: 'rating' },
+  { name: 'цене ↓', sort: 'price' },
+  { name: 'алфавиту ↓', sort: 'title' },
+  { name: 'популярности ↑', sort: '-rating' },
+  { name: 'цене ↑', sort: '-price' },
+  { name: 'алфавиту ↑', sort: '-title' },
+];
+
+function Sort() {
+  const dispath = useDispatch();
+  const value = useSelector((state) => state.filter.sort);
   const [sorts, setSorts] = React.useState(false);
   const onClickSort = () => {
     setSorts(!sorts);
   };
+  function test() {}
+
   const selectFilter = (num) => {
-    onChangeSort(num);
+    dispath(setSort(num));
     setSorts(false);
   };
   return (
