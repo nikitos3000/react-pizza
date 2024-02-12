@@ -5,18 +5,17 @@ import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
 import Skeleton from '../components/Pizza/Skeleton';
 import Pagination from '../components/Pagination';
-import { SearchContext } from '../App';
 import { setcategoryId, setFilters } from '../redux/slices/filterSlice';
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { filters } from '../components/Sort';
 import { fetchPizza } from '../redux/slices/pizzaSlice';
 
 const Home = () => {
+  const searchValue = useSelector((state) => state.filter.search);
   const items = useSelector((state) => state.pizza.items);
   const categoryId = useSelector((state) => state.filter.categoryId);
   const sortType = useSelector((state) => state.filter.sort);
-  const { searchValue } = React.useContext(SearchContext);
   const [isLoading, setIsLoading] = React.useState(true);
   const dispath = useDispatch();
   const navigate = useNavigate();
@@ -93,15 +92,16 @@ const Home = () => {
           isLoading ? (
             <Skeleton />
           ) : (
-            <Pizza
-              key={obj.id}
-              id={obj.id}
-              title={obj.title}
-              price={obj.price}
-              imgUrl={obj.imageUrl}
-              sizes={obj.sizes}
-              types={obj.types}
-            />
+            <Link key={obj.id} to={`/descript/${obj.id}`}>
+              <Pizza
+                id={obj.id}
+                title={obj.title}
+                price={obj.price}
+                imgUrl={obj.imageUrl}
+                sizes={obj.sizes}
+                types={obj.types}
+              />
+            </Link>
           ),
         )}
       </div>

@@ -5,24 +5,20 @@ import EmptyBlock from './pages/NotFound';
 import Home from './pages/Home';
 import './scss/app.scss';
 import Cart from './pages/Cart';
-
-export const SearchContext = React.createContext('');
+import { Description } from './pages/description';
 
 function App() {
-  const [searchValue, setSearchValue] = React.useState('');
-
   return (
     <div className="wrapper">
-      <SearchContext.Provider value={{ searchValue, setSearchValue }}>
-        <Header />
-        <div className="content">
-          <Routes>
-            <Route path="" element={<Home />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="*" element={<EmptyBlock />} />
-          </Routes>
-        </div>
-      </SearchContext.Provider>
+      <Header />
+      <div className="content">
+        <Routes>
+          <Route path="" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/descript/:id" element={<Description />} />
+          <Route path="" element={<EmptyBlock />} />
+        </Routes>
+      </div>
     </div>
   );
 }
