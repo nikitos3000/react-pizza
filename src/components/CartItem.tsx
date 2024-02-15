@@ -2,8 +2,20 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { minusItem, addItem, removeItem } from '../redux/slices/cartSlice';
 
-const CartItem = ({ id, title, price, imgUrl, sizes, types, count }) => {
+type CartItemsProps = {
+  id: string;
+  title: string;
+  price: number;
+  sizes: number;
+  types: number;
+  count: number;
+  imgUrl: string;
+};
+
+const CartItem: React.FC<CartItemsProps> = ({ id, title, price, imgUrl, sizes, types, count }) => {
   const dispath = useDispatch();
+  console.log(sizes);
+
   const del = () => {
     dispath(removeItem(id));
   };
@@ -17,6 +29,9 @@ const CartItem = ({ id, title, price, imgUrl, sizes, types, count }) => {
       }),
     );
   };
+  const twoTypes = ['тонкая', 'толстая'];
+  const threeSizes = ['26 см', '30 см', '40 см'];
+
   return (
     <div className="cart__item">
       <div className="cart__item-img">
@@ -25,7 +40,7 @@ const CartItem = ({ id, title, price, imgUrl, sizes, types, count }) => {
       <div className="cart__item-info">
         <h3>{title}</h3>
         <p>
-          {types}, {sizes}.
+          {twoTypes[types]}, {sizes}.
         </p>
       </div>
       <div className="cart__item-count">

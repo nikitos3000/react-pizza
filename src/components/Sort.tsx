@@ -2,7 +2,12 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from '../redux/slices/filterSlice';
 
-export const filters = [
+type TypeFilters = {
+  name: string;
+  sort: string;
+};
+
+export const filters: TypeFilters[] = [
   { name: 'популярности ↓', sort: 'rating' },
   { name: 'цене ↓', sort: 'price' },
   { name: 'алфавиту ↓', sort: 'title' },
@@ -13,20 +18,29 @@ export const filters = [
 
 function Sort() {
   const dispath = useDispatch();
-  const value = useSelector((state) => state.filter.sort);
+  const value = useSelector(
+    (state: {
+      filter: {
+        sort: {
+          name: string;
+          sort: string;
+        };
+      };
+    }) => state.filter.sort,
+  );
   const [sorts, setSorts] = React.useState(false);
-  const sortRef = React.useRef();
+  const sortRef = React.useRef<HTMLDivElement>(null);
   const onClickSort = () => {
     setSorts(!sorts);
   };
 
-  const selectFilter = (num) => {
-    dispath(setSort(num));
+  const selectFilter = (obj: TypeFilters) => {
+    dispath(setSort(obj));
     setSorts(false);
   };
 
   React.useEffect(() => {
-    const clickOutside = (event) => {
+    const clickOutside = (event: any) => {
       if (!event.composedPath().includes(sortRef.current)) {
         setSorts(false);
       }

@@ -24,7 +24,6 @@ const Home = () => {
   };
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
-  console.log(11, items);
   const search = searchValue ? `search=${searchValue}` : '';
   React.useEffect(() => {
     if (window.location.search) {

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import CartItem from '../components/CartItem';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +17,7 @@ const Cart = () => {
   if (!count) {
     return <CartEmpty />;
   }
-
+  console.log(pizzas);
   return (
     <div className="container container--cart">
       <div className="cart">
@@ -102,8 +101,8 @@ const Cart = () => {
               title={obj.title}
               price={obj.price}
               imgUrl={obj.imageUrl}
-              sizes={obj.sizes}
-              types={obj.types}
+              sizes={obj.size}
+              types={obj.type}
               count={obj.count}
             />
           ))}

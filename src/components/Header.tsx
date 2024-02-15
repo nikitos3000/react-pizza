@@ -3,7 +3,9 @@ import Search from './Search';
 import { useSelector } from 'react-redux';
 function Header() {
   const { pathname } = useLocation();
-  const { totalPrice, totalCount } = useSelector((state) => state.cart);
+  const { totalPrice, totalCount } = useSelector(
+    (state: { cart: { totalPrice: number; totalCount: number } }) => state.cart,
+  );
   return (
     <div className="header">
       <div className="container">

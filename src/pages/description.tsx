@@ -1,11 +1,15 @@
 import axios from 'axios';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const Description = () => {
-  const [pizza, setPizza] = React.useState();
+const Description: React.FC = () => {
+  const [pizza, setPizza] = React.useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>();
   const { id } = useParams();
-  console.log(pizza);
+  const navigate = useNavigate();
   React.useEffect(() => {
     async function fetchPizza() {
       try {
@@ -13,13 +17,14 @@ const Description = () => {
         setPizza(data);
       } catch (error) {
         alert(error);
+        navigate('/');
       }
     }
     fetchPizza();
   }, []);
 
   if (!pizza) {
-    return 'Загрузка';
+    return <>Загрузка</>;
   }
 
   return (
