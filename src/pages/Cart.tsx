@@ -3,12 +3,31 @@ import CartItem from '../components/CartItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearItems } from '../redux/slices/cartSlice';
 import CartEmpty from '../components/CartEmpty';
+import React from 'react';
 
-const Cart = () => {
-  const pizzas = useSelector((state) => state.cart.items);
+const Cart: React.FC = () => {
+  const pizzas = useSelector(
+    (state: {
+      cart: {
+        items;
+      };
+    }) => state.cart.items,
+  );
   console.log(pizzas);
-  const count = useSelector((state) => state.cart.totalCount);
-  const totalPrice = useSelector((state) => state.cart.totalPrice);
+  const count = useSelector(
+    (state: {
+      cart: {
+        totalCount: number;
+      };
+    }) => state.cart.totalCount,
+  );
+  const totalPrice = useSelector(
+    (state: {
+      cart: {
+        totalPrice: number;
+      };
+    }) => state.cart.totalPrice,
+  );
   const dispath = useDispatch();
   const clear = () => {
     dispath(clearItems());

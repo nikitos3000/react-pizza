@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Pizza from '../components/Pizza';
@@ -10,16 +10,23 @@ import qs from 'qs';
 import { Link, useNavigate } from 'react-router-dom';
 import { filters } from '../components/Sort';
 import { fetchPizza } from '../redux/slices/pizzaSlice';
+import { RootState, useAppDispath } from '../redux/store';
 
-const Home = () => {
-  const searchValue = useSelector((state) => state.filter.search);
-  const items = useSelector((state) => state.pizza.items);
-  const categoryId = useSelector((state) => state.filter.categoryId);
-  const sortType = useSelector((state) => state.filter.sort);
+const Home: React.FC = () => {
+  const searchValue = useSelector((state: RootState) => state.filter.search);
+  const items = useSelector((state: RootState) => state.pizza.items);
+  const categoryId = useSelector((state: RootState) => state.filter.categoryId);
+  const sortType = useSelector(
+    (state: {
+      filter: {
+        sort;
+      };
+    }) => state.filter.sort,
+  );
   const [isLoading, setIsLoading] = React.useState(true);
-  const dispath = useDispatch();
+  const dispath = useAppDispath();
   const navigate = useNavigate();
-  const onClickCategories = (id) => {
+  const onClickCategories = (id: number) => {
     dispath(setcategoryId(id));
   };
   const isSearch = React.useRef(false);
@@ -82,12 +89,12 @@ const Home = () => {
   return (
     <div className="container">
       <div className="content__top">
-        <Categories value={categoryId} onClickCategory={(i) => onClickCategories(i)} />
+        <Categories value={categoryId} onClickCategory={onClickCategories} />
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {items.map((obj) =>
+        {items.map((obj: any) =>
           isLoading ? (
             <Skeleton />
           ) : (

@@ -1,11 +1,25 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../redux/slices/cartSlice';
+import { RootState } from '../../redux/store';
 const typeNames = ['тонкая', 'толстая'];
-function Pizza({ id, title, imgUrl, price, sizes, types }) {
-  const dispath = useDispatch();
 
-  const findCount = useSelector((state) => state.cart.items.find((obj) => obj.id === id));
+type PizzaProps = {
+  id: string;
+  title: string;
+  price: number;
+  sizes: number[];
+  types: number[];
+  imgUrl: string;
+};
+
+const Pizza: React.FC<PizzaProps> = ({ id, title, imgUrl, price, sizes, types }) => {
+  const dispath = useDispatch();
+  console.log(sizes);
+
+  const findCount = useSelector((state: RootState) =>
+    state.cart.items.find((obj) => obj.id === id),
+  );
   const [activeType, setActiveType] = React.useState(0);
   const [activeSize, setActiveSize] = React.useState(0);
 
@@ -79,5 +93,5 @@ function Pizza({ id, title, imgUrl, price, sizes, types }) {
       </div>
     </div>
   );
-}
+};
 export default Pizza;
