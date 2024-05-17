@@ -26,9 +26,9 @@ const Home: React.FC = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const dispath = useAppDispath();
   const navigate = useNavigate();
-  const onClickCategories = (id: number) => {
+  const onClickCategories = React.useCallback((id: number) => {
     dispath(setcategoryId(id));
-  };
+  }, []);
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
   const search = searchValue ? `search=${searchValue}` : '';
@@ -98,16 +98,14 @@ const Home: React.FC = () => {
           isLoading ? (
             <Skeleton />
           ) : (
-            <Link key={obj.id} to={`/descript/${obj.id}`}>
-              <Pizza
-                id={obj.id}
-                title={obj.title}
-                price={obj.price}
-                imgUrl={obj.imageUrl}
-                sizes={obj.sizes}
-                types={obj.types}
-              />
-            </Link>
+            <Pizza
+              id={obj.id}
+              title={obj.title}
+              price={obj.price}
+              imgUrl={obj.imageUrl}
+              sizes={obj.sizes}
+              types={obj.types}
+            />
           ),
         )}
       </div>

@@ -13,7 +13,6 @@ const Cart: React.FC = () => {
       };
     }) => state.cart.items,
   );
-  console.log(pizzas);
   const count = useSelector(
     (state: {
       cart: {

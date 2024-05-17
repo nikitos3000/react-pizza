@@ -15,7 +15,6 @@ type PizzaProps = {
 
 const Pizza: React.FC<PizzaProps> = ({ id, title, imgUrl, price, sizes, types }) => {
   const dispath = useDispatch();
-  console.log(sizes);
 
   const findCount = useSelector((state: RootState) =>
     state.cart.items.find((obj) => obj.id === id),

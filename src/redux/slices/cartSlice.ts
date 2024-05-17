@@ -17,9 +17,9 @@ interface CartState {
 }
 
 const initialState: CartState = {
-  totalPrice: 0,
-  totalCount: 0,
-  items: [],
+  totalPrice: JSON.parse(localStorage.getItem('price')),
+  totalCount: JSON.parse(localStorage.getItem('count')),
+  items: JSON.parse(localStorage.getItem('cart')),
 };
 
 const cartSlice = createSlice({
