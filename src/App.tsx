@@ -1,10 +1,11 @@
-import Header from './components/Header';
-import { Route, Routes } from 'react-router-dom';
-import EmptyBlock from './pages/NotFound';
-import Home from './pages/Home';
-import './scss/app.scss';
-import Cart from './pages/Cart';
-import { Description } from './pages/description';
+import Header from "./components/Header.tsx";
+import { Route, Routes } from "react-router-dom";
+import EmptyBlock from "./pages/NotFound.tsx";
+import Home from "./pages/Home.tsx";
+import "./scss/app.scss";
+import Cart from "./pages/Cart.tsx";
+import { Description } from "./pages/description.tsx";
+import React from "react";
 
 function App() {
   return (

@@ -1,6 +1,6 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { minusItem, addItem, removeItem } from '../redux/slices/cartSlice';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { minusItem, addItem, removeItem } from "../redux/slices/cartSlice.ts";
 
 type CartItemsProps = {
   id: string;
@@ -12,7 +12,15 @@ type CartItemsProps = {
   imgUrl: string;
 };
 
-const CartItem: React.FC<CartItemsProps> = ({ id, title, price, imgUrl, sizes, types, count }) => {
+const CartItem: React.FC<CartItemsProps> = ({
+  id,
+  title,
+  price,
+  imgUrl,
+  sizes,
+  types,
+  count,
+}) => {
   const dispath = useDispatch();
   console.log(sizes);
 
@@ -26,11 +34,11 @@ const CartItem: React.FC<CartItemsProps> = ({ id, title, price, imgUrl, sizes, t
     dispath(
       addItem({
         id,
-      }),
+      })
     );
   };
-  const twoTypes = ['тонкая', 'толстая'];
-  const threeSizes = ['26 см', '30 см', '40 см'];
+  const twoTypes = ["тонкая", "толстая"];
+  const threeSizes = ["26 см", "30 см", "40 см"];
 
   return (
     <div className="cart__item">
@@ -47,13 +55,15 @@ const CartItem: React.FC<CartItemsProps> = ({ id, title, price, imgUrl, sizes, t
         <button
           disabled={count === 1}
           onClick={minus}
-          className="button button--outline button--circle cart__item-count-minus">
+          className="button button--outline button--circle cart__item-count-minus"
+        >
           <svg
             width="10"
             height="10"
             viewBox="0 0 10 10"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z"
               fill="#EB5A1E"
@@ -65,13 +75,17 @@ const CartItem: React.FC<CartItemsProps> = ({ id, title, price, imgUrl, sizes, t
           </svg>
         </button>
         <b>{count}</b>
-        <div onClick={add} className="button button--outline button--circle cart__item-count-plus">
+        <div
+          onClick={add}
+          className="button button--outline button--circle cart__item-count-plus"
+        >
           <svg
             width="10"
             height="10"
             viewBox="0 0 10 10"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z"
               fill="#EB5A1E"
@@ -93,7 +107,8 @@ const CartItem: React.FC<CartItemsProps> = ({ id, title, price, imgUrl, sizes, t
             height="10"
             viewBox="0 0 10 10"
             fill="none"
-            xmlns="http://www.w3.org/2000/svg">
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M5.92001 3.84V5.76V8.64C5.92001 9.17016 5.49017 9.6 4.96001 9.6C4.42985 9.6 4.00001 9.17016 4.00001 8.64L4 5.76L4.00001 3.84V0.96C4.00001 0.42984 4.42985 0 4.96001 0C5.49017 0 5.92001 0.42984 5.92001 0.96V3.84Z"
               fill="#EB5A1E"

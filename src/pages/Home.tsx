@@ -1,16 +1,16 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import Categories from '../components/Categories';
-import Sort from '../components/Sort';
-import Pizza from '../components/Pizza';
-import Skeleton from '../components/Pizza/Skeleton';
-import Pagination from '../components/Pagination';
-import { setcategoryId, setFilters } from '../redux/slices/filterSlice';
-import qs from 'qs';
-import { Link, useNavigate } from 'react-router-dom';
-import { filters } from '../components/Sort';
-import { fetchPizza } from '../redux/slices/pizzaSlice';
-import { RootState, useAppDispath } from '../redux/store';
+import React from "react";
+import { useSelector } from "react-redux";
+import Categories from "../components/Categories.tsx";
+import Sort from "../components/Sort.tsx";
+import Pizza from "../components/Pizza/index.tsx";
+import Skeleton from "../components/Pizza/Skeleton.tsx";
+import Pagination from "../components/Pagination/index.tsx";
+import { setcategoryId, setFilters } from "../redux/slices/filterSlice.ts";
+import qs from "qs";
+import { Link, useNavigate } from "react-router-dom";
+import { filters } from "../components/Sort.tsx";
+import { fetchPizza } from "../redux/slices/pizzaSlice.ts";
+import { RootState, useAppDispath } from "../redux/store.ts";
 
 const Home: React.FC = () => {
   const searchValue = useSelector((state: RootState) => state.filter.search);
@@ -21,7 +21,7 @@ const Home: React.FC = () => {
       filter: {
         sort;
       };
-    }) => state.filter.sort,
+    }) => state.filter.sort
   );
   const [isLoading, setIsLoading] = React.useState(true);
   const dispath = useAppDispath();
@@ -31,7 +31,7 @@ const Home: React.FC = () => {
   }, []);
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
-  const search = searchValue ? `search=${searchValue}` : '';
+  const search = searchValue ? `search=${searchValue}` : "";
   React.useEffect(() => {
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
@@ -41,14 +41,14 @@ const Home: React.FC = () => {
         setFilters({
           ...params,
           ssort,
-        }),
+        })
       );
       isSearch.current = true;
     }
   }, []);
 
   async function getPizza() {
-    const sortBy = sortType.sort.replace('-', '');
+    const sortBy = sortType.sort.replace("-", "");
     setIsLoading(true);
     try {
       dispath(
@@ -57,11 +57,11 @@ const Home: React.FC = () => {
           categoryId,
           search,
           sortType,
-        }),
+        })
       );
     } catch (error) {
       console.log(error);
-      alert('err');
+      alert("err");
     } finally {
       setIsLoading(false);
     }
@@ -106,7 +106,7 @@ const Home: React.FC = () => {
               sizes={obj.sizes}
               types={obj.types}
             />
-          ),
+          )
         )}
       </div>
       <Pagination />

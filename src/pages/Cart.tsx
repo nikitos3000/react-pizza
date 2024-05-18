@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
-import CartItem from '../components/CartItem';
-import { useDispatch, useSelector } from 'react-redux';
-import { clearItems } from '../redux/slices/cartSlice';
-import CartEmpty from '../components/CartEmpty';
-import React from 'react';
+import { Link } from "react-router-dom";
+import CartItem from "../components/CartItem.tsx";
+import { useDispatch, useSelector } from "react-redux";
+import { clearItems } from "../redux/slices/cartSlice.ts";
+import CartEmpty from "../components/CartEmpty.tsx";
+import React from "react";
 
 const Cart: React.FC = () => {
   const pizzas = useSelector(
@@ -11,21 +11,21 @@ const Cart: React.FC = () => {
       cart: {
         items;
       };
-    }) => state.cart.items,
+    }) => state.cart.items
   );
   const count = useSelector(
     (state: {
       cart: {
         totalCount: number;
       };
-    }) => state.cart.totalCount,
+    }) => state.cart.totalCount
   );
   const totalPrice = useSelector(
     (state: {
       cart: {
         totalPrice: number;
       };
-    }) => state.cart.totalPrice,
+    }) => state.cart.totalPrice
   );
   const dispath = useDispatch();
   const clear = () => {
@@ -46,7 +46,8 @@ const Cart: React.FC = () => {
               height="18"
               viewBox="0 0 18 18"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg">
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M6.33333 16.3333C7.06971 16.3333 7.66667 15.7364 7.66667 15C7.66667 14.2636 7.06971 13.6667 6.33333 13.6667C5.59695 13.6667 5 14.2636 5 15C5 15.7364 5.59695 16.3333 6.33333 16.3333Z"
                 stroke="white"
@@ -77,7 +78,8 @@ const Cart: React.FC = () => {
               height="20"
               viewBox="0 0 20 20"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg">
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M2.5 5H4.16667H17.5"
                 stroke="#B6B6B6"
@@ -128,22 +130,26 @@ const Cart: React.FC = () => {
         <div className="cart__bottom">
           <div className="cart__bottom-details">
             <span>
-              {' '}
-              Всего пицц: <b>{count}.</b>{' '}
+              {" "}
+              Всего пицц: <b>{count}.</b>{" "}
             </span>
             <span>
-              {' '}
-              Сумма заказа: <b>{totalPrice} ₽</b>{' '}
+              {" "}
+              Сумма заказа: <b>{totalPrice} ₽</b>{" "}
             </span>
           </div>
           <div className="cart__bottom-buttons">
-            <Link to={'/'} className="button button--outline button--add go-back-btn">
+            <Link
+              to={"/"}
+              className="button button--outline button--add go-back-btn"
+            >
               <svg
                 width="8"
                 height="14"
                 viewBox="0 0 8 14"
                 fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <path
                   d="M7 13L1 6.93015L6.86175 1"
                   stroke="#D3D3D3"

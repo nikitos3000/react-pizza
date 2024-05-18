@@ -1,5 +1,5 @@
-import React from 'react';
-import NotFound from '../components/NotFound';
+import React from "react";
+import NotFound from "../components/NotFound/index.tsx";
 
 const EmptyBlock: React.FC = () => {
   return (
